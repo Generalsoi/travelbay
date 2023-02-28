@@ -1,6 +1,7 @@
 import React, { FC, useState } from "react";
 import Logo from "../assets/Logo.png";
 import { AiOutlineArrowDown } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 export const Login: FC = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -112,6 +113,26 @@ export const Login: FC = () => {
               </button>
             </div>
           </form>
+
+          <div className="mt-4 text-center">
+            <p className="text-[#667085] text-sm md:text-md font-bold">
+              Forgot your password?{" "}
+              <span className="text-[#093549] underline">
+                <Link to="/"> Reset it here</Link>
+              </span>
+            </p>
+          </div>
+
+          <div className="w-full flex items-center justify-center mt-8">
+            <div className="flex items-center justify-center w-fit px-6 py-3 bg-[#EDF8FC] rounded-lg">
+              <p className="text-[#667085] text-sm md:text-md font-bold">
+                Having problems logging in?{" "}
+                <span className="text-[#093549] underline">
+                  <Link to="/"> Chat with us</Link>
+                </span>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
