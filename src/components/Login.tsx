@@ -60,7 +60,7 @@ export const Login: FC = () => {
                 Email Address
               </label>
               <div
-                className="w-full h-12 mb-8 mt-2"
+                className="w-full h-12 mb-8 mt-2 rounded-md"
                 style={{ border: "1px solid rgba(18, 18, 18, 0.12)" }}
               >
                 <input
@@ -80,7 +80,7 @@ export const Login: FC = () => {
               </label>
 
               <div
-                className="w-full h-12 flex justify-between mb-3 relative mt-2"
+                className="w-full h-12 flex justify-between mb-3 relative mt-2 rounded-md"
                 style={{ border: "1px solid rgba(18, 18, 18, 0.12)" }}
               >
                 <input
@@ -104,6 +104,12 @@ export const Login: FC = () => {
                   </p>
                 )}
               </div>
+            </div>
+
+            <div className="mt-10 w-full h-12">
+              <button className="bg-[#1C9FDA] text-white border-none rounded-md w-full h-full font-bold hover:opacity-90">
+                Log in
+              </button>
             </div>
           </form>
         </div>
