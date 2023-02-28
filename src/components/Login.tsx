@@ -1,8 +1,10 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import Logo from "../assets/Logo.png";
 import { AiOutlineArrowDown } from "react-icons/ai";
 
 export const Login: FC = () => {
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+
   return (
     <div className="font-dmsans md:flex items-start w-full">
       <div className="w-full md:w-[50%] bg-[#F7F7F8] px-4 md:px-20 md:h-screen py-6 md:py-10">
@@ -43,8 +45,8 @@ export const Login: FC = () => {
         <div className="flex items-center justify-end ">
           <h2 className="font-bold text-sm md:text-md">Create an account</h2>
         </div>
-        <div className="md:mt-32">
-          <h2 className="font-bold text-lg md:text-2xl">Welcome back</h2>
+        <div className="mt-20 md:mt-32">
+          <h2 className="font-bold text-xl md:text-2xl">Welcome back</h2>
           <p className="text-xs md:text-sm text-[#093549] mt-3">
             Login your travelbay account
           </p>
@@ -66,6 +68,41 @@ export const Login: FC = () => {
                   placeholder="Enter your email address"
                   className="w-full h-full outline-none px-4 rounded-lg"
                 />
+              </div>
+            </div>
+
+            <div>
+              <label
+                htmlFor="password"
+                className="text-[#093549] font-bold text-sm md:text-md"
+              >
+                Password
+              </label>
+
+              <div
+                className="w-full h-12 flex justify-between mb-3 relative mt-2"
+                style={{ border: "1px solid rgba(18, 18, 18, 0.12)" }}
+              >
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password (min of 8 characters)"
+                  className="w-full h-full outline-none px-4 "
+                />
+                {showPassword ? (
+                  <p
+                    className="place-self-center absolute right-4 text-[#1C9FDA] text-sm cursor-pointer font-bold "
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    Hide
+                  </p>
+                ) : (
+                  <p
+                    className="place-self-center absolute right-4 text-[#1C9FDA] text-sm cursor-pointer font-bold"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    Show
+                  </p>
+                )}
               </div>
             </div>
           </form>
