@@ -39,7 +39,38 @@ export const Login: FC = () => {
           </div>
         </div>
       </div>
-      <div className="w-full md:w-[50%]"></div>
+      <div className="w-full md:w-[50%] px-4 md:px-20 md:h-screen py-6 md:py-10">
+        <div className="flex items-center justify-end ">
+          <h2 className="font-bold text-sm md:text-md">Create an account</h2>
+        </div>
+        <div className="md:mt-32">
+          <h2 className="font-bold text-lg md:text-2xl">Welcome back</h2>
+          <p className="text-xs md:text-sm text-[#093549] mt-3">
+            Login your travelbay account
+          </p>
+
+          <form className="mt-6">
+            <div>
+              <label
+                htmlFor="email"
+                className="text-[#093549] font-bold text-sm md:text-md"
+              >
+                Email Address
+              </label>
+              <div
+                className="w-full h-12 mb-8 mt-2"
+                style={{ border: "1px solid rgba(18, 18, 18, 0.12)" }}
+              >
+                <input
+                  type="text"
+                  placeholder="Enter your email address"
+                  className="w-full h-full outline-none px-4 rounded-lg"
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };
