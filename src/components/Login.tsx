@@ -1,48 +1,25 @@
 import React, { FC, useState } from "react";
-import Logo from "../assets/Logo.png";
-import { AiOutlineArrowDown } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { TravelbayInfo } from "./TravelbayInfo";
 
 export const Login: FC = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
+
+  const handleLogin = (e: any) => {
+    e.preventDefault();
+    console.log("logged in");
+  };
 
   return (
     <div className="font-dmsans md:flex items-start w-full">
-      <div className="w-full md:w-[50%] bg-[#F7F7F8] px-4 md:px-20 md:h-screen py-6 md:py-10">
-        <div>
-          <img src={Logo} alt="TravelBay-Logo" />
-        </div>
-        <div className="md:h-[80%] md:flex items-end justify-center">
-          <div className="md:hidden w-full h-96 bg-[#F7F7F8]"></div>
-          <div className="text-center">
-            <h3 className="text-[#093549] font-bold text-lg md:text-xl">
-              Customize a payment plan for your dream trip
-            </h3>
-            <span>
-              <p className="text-[#475467] text-xs md:text-sm mt-3">
-                Choose a payment frequency that works for you to make your
-              </p>
-              <p className="text-[#475467] text-xs md:text-sm">
-                dream trip happen. You can pay in installments before the
-              </p>
-              <p className="text-[#475467] text-xs md:text-sm">
-                departure date is close.
-              </p>
-            </span>
-            <div className="flex items-center justify-center gap-4 mt-6">
-              <div className="w-20 h-2 border rounded-lg bg-[#D4DFE4]"></div>
-              <div className="w-20 h-2 border rounded-lg bg-[#1C9FDA]"></div>
-            </div>
-
-            <div className="md:hidden flex items-center justify-center mt-6">
-              <div className="w-10 h-10 bg-white border-none rounded-full flex items-center justify-center animate-bounce">
-                <AiOutlineArrowDown className="text-xl" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="w-full md:w-[50%] px-4 md:px-20 md:h-screen py-6 md:py-10">
+      <TravelbayInfo />
+      <div
+        className="w-full md:w-[50%] px-4 md:px-20 md:h-screen py-6 md:py-10"
+        id="form"
+      >
         <div className="flex items-center justify-end ">
           <h2 className="font-bold text-sm md:text-md">Create an account</h2>
         </div>
@@ -52,7 +29,7 @@ export const Login: FC = () => {
             Login your travelbay account
           </p>
 
-          <form className="mt-6">
+          <form className="mt-6" onSubmit={handleLogin}>
             <div>
               <label
                 htmlFor="email"
@@ -65,11 +42,17 @@ export const Login: FC = () => {
                 style={{ border: "1px solid rgba(18, 18, 18, 0.12)" }}
               >
                 <input
-                  type="text"
+                  type="email"
                   placeholder="Enter your email address"
                   className="w-full h-full outline-none px-4 rounded-lg"
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
+              {error && (
+                <div className="w-full p-3">
+                  <p className="text-red-500 font-bold text-xs">{error}</p>
+                </div>
+              )}
             </div>
 
             <div>
@@ -88,6 +71,7 @@ export const Login: FC = () => {
                   type={showPassword ? "text" : "password"}
                   placeholder="Password (min of 8 characters)"
                   className="w-full h-full outline-none px-4 "
+                  onChange={(e) => setPassword(e.target.value)}
                 />
                 {showPassword ? (
                   <p
@@ -108,7 +92,10 @@ export const Login: FC = () => {
             </div>
 
             <div className="mt-10 w-full h-12">
-              <button className="bg-[#1C9FDA] text-white border-none rounded-md w-full h-full font-bold hover:opacity-90">
+              <button
+                type="submit"
+                className="bg-[#1C9FDA] text-white border-none rounded-md w-full h-full font-bold hover:opacity-90"
+              >
                 Log in
               </button>
             </div>
@@ -118,7 +105,7 @@ export const Login: FC = () => {
             <p className="text-[#667085] text-sm md:text-md font-bold">
               Forgot your password?{" "}
               <span className="text-[#093549] underline">
-                <Link to="/"> Reset it here</Link>
+                <Link to="/resetpassword"> Reset it here</Link>
               </span>
             </p>
           </div>
