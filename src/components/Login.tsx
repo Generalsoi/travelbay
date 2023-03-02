@@ -1,16 +1,37 @@
 import React, { FC, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { TravelbayInfo } from "./TravelbayInfo";
+import { gql, useMutation } from "@apollo/client";
 
 export const Login: FC = () => {
+  const LOGIN = gql`
+    mutation login($email: Email!, $password: String!) {
+      login(email: $email, password: $password) {
+        email
+        password
+      }
+    }
+  `;
+
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
 
+  const navigate = useNavigate();
+
+  const [Login, { loading }] = useMutation(LOGIN);
+
   const handleLogin = (e: any) => {
     e.preventDefault();
-    console.log("logged in");
+
+    Login({
+      variables: { email, password },
+    });
+
+    if (loading) {
+      navigate("/userdetails");
+    }
   };
 
   return (

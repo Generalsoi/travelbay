@@ -2,11 +2,68 @@ import React, { FC, useState } from "react";
 import Logo from "../assets/Logo.png";
 import { AiOutlineArrowDown } from "react-icons/ai";
 import { HashLink } from "react-router-hash-link";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Vector from "../assets/Vector.png";
+import { gql, useMutation } from "@apollo/client";
 
 export const CreateAccount: FC = () => {
+  const CREATE_ACCOUNT = gql`
+    mutation register(
+      $firstName: String!
+      $lastName: String!
+      $email: Email!
+      $password: String!
+      $phoneNumber: String!
+    ) {
+      register(
+        firstName: $firstName
+        lastName: $lastName
+        email: $email
+        password: $password
+        phoneNumber: $phoneNumber
+      ) {
+        firstName
+        lastName
+        email
+        password
+        phoneNumber
+      }
+    }
+  `;
+
   const [showPassword, setShowPassword] = useState<boolean>(false);
+
+  const navigate = useNavigate();
+
+  // getting the data from the form
+  const [firstName, setFirstName] = useState<string>("");
+  const [lastName, setLastName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const [currentError, setCurrentError] = useState<string>("");
+
+  const [createAccount, { data, loading, error }] = useMutation(CREATE_ACCOUNT);
+
+  const handleCreateAccount = (e: any) => {
+    e.preventDefault();
+
+    createAccount({
+      variables: { firstName, lastName, email, password, phoneNumber },
+    });
+    if (loading) {
+      navigate("/userdetails");
+    }
+    if (error) {
+      setCurrentError(error.message);
+    }
+    console.log(currentError);
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setPassword("");
+    setPhoneNumber("");
+  };
 
   return (
     <div className="font-dmsans md:flex items-start w-full">
@@ -65,7 +122,7 @@ export const CreateAccount: FC = () => {
             Create an account and enjoy a seamless travel booking experience
           </p>
 
-          <form className="mt-6">
+          <form className="mt-6" onSubmit={handleCreateAccount}>
             <div className="w-full md:flex gap-6 items-center">
               <div className="w-full md:w-[48%]">
                 <label
@@ -80,11 +137,14 @@ export const CreateAccount: FC = () => {
                 >
                   <input
                     type="text"
+                    value={firstName}
                     placeholder="Enter your first name"
                     className="w-full h-full outline-none px-4 rounded-lg"
+                    onChange={({ target }) => setFirstName(target.value)}
                   />
                 </div>
               </div>
+
               <div className="w-full md:w-[48%]">
                 <label
                   htmlFor="lastName"
@@ -98,8 +158,10 @@ export const CreateAccount: FC = () => {
                 >
                   <input
                     type="text"
+                    value={lastName}
                     placeholder="Enter your last name"
                     className="w-full h-full outline-none px-4 rounded-lg"
+                    onChange={({ target }) => setLastName(target.value)}
                   />
                 </div>
               </div>
@@ -118,8 +180,10 @@ export const CreateAccount: FC = () => {
               >
                 <input
                   type="email"
+                  value={email}
                   placeholder="Enter your email address"
                   className="w-full h-full outline-none px-4 rounded-lg"
+                  onChange={({ target }) => setEmail(target.value)}
                 />
               </div>
             </div>
@@ -137,7 +201,9 @@ export const CreateAccount: FC = () => {
               >
                 <input
                   type="tel"
+                  value={phoneNumber}
                   className="w-[full - 18] md:w-[full - 20] h-full ml-20 outline-none px-4 rounded-lg"
+                  onChange={({ target }) => setPhoneNumber(target.value)}
                 />
                 <div
                   className="w-18 md:w-20 h-10 absolute top-0 left-0 rounded-tl-lg rounded-bl-lg flex items-center justify-center"
@@ -172,8 +238,10 @@ export const CreateAccount: FC = () => {
               >
                 <input
                   type={showPassword ? "text" : "password"}
+                  value={password}
                   placeholder="Password (min of 8 characters and a number)"
                   className="w-full h-full outline-none px-4 "
+                  onChange={({ target }) => setPassword(target.value)}
                 />
                 {showPassword ? (
                   <p
@@ -206,7 +274,7 @@ export const CreateAccount: FC = () => {
               </label>
             </div>
             <div className="w-full mt-2 flex items-center gap-2">
-              <input checked type="checkbox" id="check-box" />
+              <input defaultChecked type="checkbox" id="check-box" />
               <label htmlFor="check-box" className="text-sm md:text-md">
                 Join Travelbay travel community for exclusive access to travel
                 resources and events to help you grow.
