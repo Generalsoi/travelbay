@@ -3,6 +3,7 @@ import Logo from "../assets/Logo.png";
 import { AiOutlineArrowDown } from "react-icons/ai";
 import { HashLink } from "react-router-hash-link";
 import { Link } from "react-router-dom";
+import Vector from "../assets/Vector.png";
 
 export const CreateAccount: FC = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -136,16 +137,20 @@ export const CreateAccount: FC = () => {
               >
                 <input
                   type="tel"
-                  className="w-[full - 18] md:w-[full - 32] h-full ml-32 outline-none px-4 rounded-lg"
+                  className="w-[full - 18] md:w-[full - 20] h-full ml-20 outline-none px-4 rounded-lg"
                 />
                 <div
-                  className="w-18 md:w-32 h-10 absolute top-0 left-0 rounded-tl-lg rounded-bl-lg flex items-center justify-center"
+                  className="w-18 md:w-20 h-10 absolute top-0 left-0 rounded-tl-lg rounded-bl-lg flex items-center justify-center"
                   style={{ border: "1px solid rgba(18, 18, 18, 0.12)" }}
                 >
                   <select
                     name="phone"
                     id="phone"
                     className="outline-none px-1 md:px-4 w-full h-full bg-[#F9F9F9]"
+                    style={{
+                      background: `url(${Vector}) 90% no-repeat`,
+                      appearance: "none",
+                    }}
                   >
                     <option value="phone">+234</option>
                   </select>
