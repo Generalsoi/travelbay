@@ -11,7 +11,11 @@ export const ResetPassword: FC = () => {
         id="form"
       >
         <div className="flex items-center justify-end ">
-          <h2 className="font-bold text-sm md:text-md">Create an account</h2>
+          <Link to="/createaccount">
+            <h2 className="font-bold text-sm md:text-md hover:opacity-80">
+              Create an account
+            </h2>
+          </Link>
         </div>
         <div className="mt-20 md:mt-32">
           <h2 className="font-bold text-xl md:text-2xl">Reset your password</h2>
